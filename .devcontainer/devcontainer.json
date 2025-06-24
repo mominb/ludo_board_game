@@ -18,16 +18,49 @@
     "customizations": {
         "vscode": {
             "extensions": [
+                // Core Python Development
                 "ms-python.python",
-                "ms-python.black-formatter",
-                "ms-python.flake8",
                 "ms-python.mypy-type-checker",
-                "ms-python.isort",
-                "ms-python.pylint",
+                "charliermarsh.ruff",                    // Modern all-in-one tool (linting + formatting + import sorting)
+                "ms-python.black-formatter",             // Keep as fallback/alternative formatter
+                // Testing and Debugging
+                "ms-python.debugpy",
+                "hbenl.vscode-test-explorer",
+                "littlefoxteam.vscode-python-test-adapter",
+                // Documentation and Code Quality
+                "njpwerner.autodocstring",
+                "ms-python.docstring-to-markdown",
                 "ms-toolsai.jupyter",
+                // Git and Version Control
+                "mhutchie.git-graph",
+                "eamodio.gitlens",
+                "github.vscode-pull-request-github",
+                // File Management and Editing
                 "ms-vscode.vscode-json",
+                "redhat.vscode-yaml",
+                "ms-vscode.vscode-typescript-next",
+                "ms-vscode.live-server",
+                // Code Intelligence and Navigation
+                "ms-vscode.vscode-pylance",
+                "visualstudioexptteam.vscodeintellicode",
+                "ms-vscode.hexeditor",
+                // Documentation and Writing
                 "streetsidesoftware.code-spell-checker",
-                "yzhang.markdown-all-in-one"
+                "yzhang.markdown-all-in-one",            // Primary markdown extension
+                "davidanson.vscode-markdownlint",
+                // Productivity and AI
+                "github.copilot",
+                "github.copilot-chat",
+                // Code Formatting and Linting
+                "esbenp.prettier-vscode",
+                "ms-vscode.vscode-css-peek",
+                "formulahendry.auto-rename-tag",
+                // Additional Useful Extensions
+                "ms-vscode.theme-predawn",
+                "pkief.material-icon-theme",
+                "christian-kohler.path-intellisense",
+                "alefragnani.bookmarks",
+                "gruntfuggly.todo-tree"
             ],
             "settings": {
                 "python.defaultInterpreterPath": "/usr/local/bin/python",
@@ -45,25 +78,59 @@
                 "black-formatter.args": [
                     "--line-length=88"
                 ],
-                "flake8.args": [
-                    "--max-line-length=88",
-                    "--extend-ignore=E203,W503"
-                ],
-                "isort.args": [
-                    "--profile",
-                    "black"
-                ],
                 "editor.formatOnSave": true,
                 "editor.codeActionsOnSave": {
-                    "source.organizeImports": true
+                    "source.organizeImports": "explicit",
+                    "source.fixAll.ruff": "explicit"
+                },
+                // Default Formatter Selection
+                "[python]": {
+                    "editor.defaultFormatter": "charliermarsh.ruff",
+                    "editor.formatOnSave": true,
+                    "editor.codeActionsOnSave": {
+                        "source.fixAll.ruff": "explicit",
+                        "source.organizeImports.ruff": "explicit"
+                    }
                 },
                 "files.exclude": {
                     "**/__pycache__": true,
                     "**/*.pyc": true,
                     "**/.pytest_cache": true,
-                    "**/.coverage": true
+                    "**/.coverage": true,
+                    "**/.mypy_cache": true,
+                    "**/.ruff_cache": true
                 },
-                "terminal.integrated.defaultProfile.linux": "zsh"
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                // Git and GitHub Settings
+                "git.autofetch": true,
+                "git.enableSmartCommit": true,
+                "git.confirmSync": false,
+                "gitlens.codeLens.enabled": true,
+                // IntelliCode Settings
+                "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+                // Pylance Settings
+                "python.analysis.autoSearchPaths": true,
+                "python.analysis.extraPaths": [],
+                "python.analysis.diagnosticMode": "workspace",
+                // Ruff Settings
+                "ruff.enable": true,
+                "ruff.lint.enable": true,
+                "ruff.format.enable": true,
+                // Testing Settings
+                "python.testing.autoTestDiscoverOnSaveEnabled": true,
+                // Jupyter Settings
+                "jupyter.askForKernelRestart": false,
+                // UI and Theme Settings
+                "workbench.iconTheme": "material-icon-theme",
+                "workbench.colorTheme": "Default Dark Modern",
+                // Editor Settings
+                "editor.minimap.enabled": true,
+                "editor.bracketPairColorization.enabled": true,
+                "editor.guides.bracketPairs": "active",
+                "editor.suggestSelection": "first",
+                // Auto-completion Settings
+                "editor.tabCompletion": "on",
+                "editor.wordBasedSuggestions": "matchingDocuments"
             }
         }
     },
