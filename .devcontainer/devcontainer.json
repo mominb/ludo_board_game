@@ -72,8 +72,12 @@
         "PYTHONDONTWRITEBYTECODE": "1",
         "PYTHONUNBUFFERED": "1"
     },
-    "postCreateCommand": "pip install --upgrade pip && pip install -r requirements.txt",
+    "initializeCommand": "ssh-add -l >/dev/null || ssh-add",
+    "postCreateCommand": "chmod +x .devcontainer/setup.sh && .devcontainer/setup.sh",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+    "mounts": [
+        "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+    ],
     "forwardPorts": [
         8000,
         5000,
