@@ -1,14 +1,14 @@
 import unittest
 from unittest.mock import patch
-import random
-from dice import Dice, RollResult
+
+from ludo_board_game.dice import Dice, RollResult
 
 
 class TestDice(unittest.TestCase):
     def setUp(self):
         self.dice = Dice()
 
-    @patch('random.randint', return_value=6)
+    @patch("random.randint", return_value=6)
     def test_roll_six(self, mock_randint):
         result = self.dice.roll()
         self.assertEqual(result, 6)
@@ -16,26 +16,26 @@ class TestDice(unittest.TestCase):
         self.assertEqual(self.dice.roll_results[0].result, 6)
         self.assertEqual(self.dice.roll_results[0].used, False)
 
-    @patch('random.randint', side_effect=[6, 6, 6])
+    @patch("random.randint", side_effect=[6, 6, 6])
     def test_can_roll_false(self, mock_randint):
         for _ in range(3):
             self.dice.roll()
         self.assertFalse(self.dice.can_roll())
 
-    @patch('random.randint', side_effect=[6, 6])
+    @patch("random.randint", side_effect=[6, 6])
     def test_can_roll_true(self, mock_randint):
         for _ in range(2):
             self.dice.roll()
             self.assertTrue(self.dice.can_roll())
             self.assertFalse(self.dice.voided())
 
-    @patch('random.randint', side_effect=[6, 6, 6])
+    @patch("random.randint", side_effect=[6, 6, 6])
     def test_voided_true(self, mock_randint):
         for _ in range(3):
             self.dice.roll()
         self.assertTrue(self.dice.voided())
 
-    @patch('random.randint', side_effect=[6, 6, 5])
+    @patch("random.randint", side_effect=[6, 6, 5])
     def test_voided_false(self, mock_randint):
         for _ in range(3):
             self.dice.roll()
@@ -50,7 +50,7 @@ class TestDice(unittest.TestCase):
         self.dice.roll_results = [RollResult(6), RollResult(5)]
         for result in self.dice.roll_results:
             result.used = True
-        self.assertTrue(self.dice.results_used())
+        self.assertTrue(self.dice.has_used_all_results())
 
     def test_str(self):
         self.dice.roll_results = [RollResult(6), RollResult(5)]
@@ -63,5 +63,5 @@ class TestDice(unittest.TestCase):
         self.assertEqual(self.dice.can_open_pawn(), False)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

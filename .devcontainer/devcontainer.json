@@ -139,11 +139,10 @@
         "PYTHONDONTWRITEBYTECODE": "1",
         "PYTHONUNBUFFERED": "1"
     },
-    "initializeCommand": "ssh-add -l >/dev/null || ssh-add",
-    "postCreateCommand": "chmod +x .devcontainer/setup.sh && .devcontainer/setup.sh",
+    "postCreateCommand": "bash .devcontainer/setup.sh",
     "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
     "mounts": [
-        "source=${localEnv:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+        "source=${localEnv:HOME}${localEnv:USERPROFILE}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
     ],
     "forwardPorts": [
         8000,
