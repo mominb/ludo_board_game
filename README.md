@@ -1,8 +1,6 @@
 # Ludo Board Game
 
-## Video Demo
 
-URL HERE
 
 ## Description
 
